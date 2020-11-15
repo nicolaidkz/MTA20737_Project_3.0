@@ -252,6 +252,7 @@ Shader "Crest/Ocean URP"
 			#include "OceanGlobals.hlsl"
 			#include "OceanInputsDriven.hlsl"
 			#include "OceanInput.hlsl"
+			#include "Assets/Enviro - Sky and Weather/Core/Resources/Shaders/Core/EnviroFogCore.hlsl"
 			#include "OceanLODData.hlsl"
 			#include "OceanHelpersNew.hlsl"
 			#include "OceanHelpers.hlsl"
@@ -518,6 +519,7 @@ Shader "Crest/Ocean URP"
 				{
 					// underwater - do depth fog
 					col = lerp(col, scatterCol, saturate(1.0 - exp(-_DepthFogDensity.xyz * pixelZ)));
+					col = TransparentFog(real4(col, 0), input.positionWS_fogFactor.xyz, uvDepth, sceneZ).rgb;
 				}
 
 				return real4(col, 1.0);
