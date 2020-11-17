@@ -20,7 +20,7 @@ public class CustomWindArea : MonoBehaviour
             //applyForce = true;
             //coroutineShouldStart = true;
             RigidbodiesInWindZoneList.Add(objectRigid);
-            Debug.Log(objectRigid.name);
+            //Debug.Log(objectRigid.name);
         }
     }
 
@@ -62,12 +62,23 @@ public class CustomWindArea : MonoBehaviour
     {
         if (RigidbodiesInWindZoneList.Count > 0)
         {
-            foreach (Rigidbody rigid in RigidbodiesInWindZoneList)
+            for(int i = 0; i < RigidbodiesInWindZoneList.Count; i++)
             {
-                float randomStrength = Random.Range(windStrengthMin, windStrengthMax);
-                rigid.AddForce(windDirection * randomStrength);
-                Debug.Log("Force applied = " + randomStrength);
+                if(RigidbodiesInWindZoneList[i].name == "boat2.2_custom")
+                {
+                    float randomStrength = Random.Range(windStrengthMin, windStrengthMax);
+                    Rigidbody rigid = RigidbodiesInWindZoneList[i];
+                    rigid.AddForce(windDirection * randomStrength);
+                    //Debug.Log("Force applied = " + randomStrength + " to " + RigidbodiesInWindZoneList[i]);
+                }
             }
+
+            //foreach (Rigidbody rigid in RigidbodiesInWindZoneList)
+            //{
+            //    float randomStrength = Random.Range(windStrengthMin, windStrengthMax);
+            //    rigid.AddForce(windDirection * randomStrength);
+            //    Debug.Log("Force applied = " + randomStrength);
+            //}
             //if (coroutineShouldStart)
             //{
             //    StartCoroutine(Wait());
