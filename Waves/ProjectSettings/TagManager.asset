@@ -9,6 +9,7 @@ TagManager:
   - windArea
   - PlayerShip
   - Checkpoint
+  - FinishLine
   layers:
   - Default
   - TransparentFX
