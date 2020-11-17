@@ -12,11 +12,9 @@ public class TimerCollider : MonoBehaviour
     public int errors; //counts errors
     public float timerCooldown; //time between errors
     public int waitTime = 2; //time needed before another error can register
-
     void Start()
     {
         timer = new Stopwatch(); //create a stopwatch
-
     }
     void OnCollisionEnter(Collision col) //object entering whatever the start point is, subject to change
     {
@@ -30,19 +28,25 @@ public class TimerCollider : MonoBehaviour
             timer.Stop();
             print("Timer Stopped");
         }
-        if (col.gameObject.CompareTag("boundary"))  //entering a collider marked as boundary, basically anything you should not touch when sailing
+        if (timerCooldown >= waitTime) //if time between errors has exceeded the waitTime (2), register an error and reset time between errors
         {
-            if (timerCooldown >= waitTime) //if time between errors has exceeded the waitTime (2), register an error and reset time between errors
-            {
-                errors++;
-                timerCooldown = 0;
-            }
+            errors++;
+            timerCooldown = 0;
+            print("Player collided with: " + col.collider.name + " at: " + timer.Elapsed.Seconds); //debug collision name and time
+            AppendFile(errors, col.collider.name, timer, "testfile.csv"); //call method, pass information
         }
     }
-
-    void Update() //updates both stopwatch and cooldown between errors, canvas subject to be removed
+        void Update() //updates both stopwatch and cooldown between errors, canvas subject to be removed
     {
         text.text = timer.Elapsed.Seconds.ToString() + ", errors made: " + errors;
         timerCooldown += Time.deltaTime;
+    }
+
+    public static void AppendFile(int errors, string collision, Stopwatch timer, string filepath)
+    {
+        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@filepath, true)) //create new instance of class, bool true to append and not replace
+        {
+            file.WriteLine(errors + "," + collision + "," + timer.Elapsed.Seconds); //write errors, collision and timer, ex: 1,Cube,2
+        }
     }
 }
