@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -28,13 +29,13 @@ MonoBehaviour:
     baseErosionIntensity: 0
     detailErosionIntensity: 0.5
     density: 1
-    lightStepModifier: 0.4
+    lightStepModifier: 0.93
     lightVariance: 0
-    coverage: 0.493
-    lightAbsorbtion: 0.205
-    coverageType: 1
+    coverage: 0.19
+    lightAbsorbtion: 0
+    coverageType: 0
     raymarchingScale: 1
-    cloudType: 0.5
+    cloudType: 1
     cirrusAlpha: 0.576
     cirrusCoverage: 0
     cirrusColorPow: 2.17
